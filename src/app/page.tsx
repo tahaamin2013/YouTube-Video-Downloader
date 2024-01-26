@@ -41,9 +41,9 @@ export default function Home() {
         </div>
       </header>
       <div className="flex bg-indigo-600 shadow-2xl rounded-md text-white flex-col items-center min-h-[450px] w-full justify-center">
-        <h1 className="font-semibold text-[2.5rem] md:text-[3rem] text-center">
+       <h1 className="font-semibold text-[2.5rem] md:text-[3rem] text-center">
           Youtube Video Downloader
-        </h1>
+       </h1>
         <div className="mt-4 space-x-2 w-full p-4 flex justify-center">
           <input
             type="text"
@@ -52,6 +52,7 @@ export default function Home() {
             className="p-2 py-3 w-[60%] outline-none text-black rounded-md shadow-lg"
             placeholder="Paste your video link here"
           />
+          
           <button
             onClick={handleDownload}
             className="border rounded-md py-1 px-4 font-semibold shadow-lg"
