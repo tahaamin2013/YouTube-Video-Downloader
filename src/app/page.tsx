@@ -40,7 +40,7 @@ export default function Home() {
           <p>Share Now</p>
         </div>
       </header>
-      <div className="flex bg-indigo-600 shadow-2xl rounded-md text-white flex-col items-center min-h-[450px] w-full justify-center">
+      <div className="flex bg-indigo-600 shadow-2xl rounded-md rounded-b-none text-white flex-col items-center min-h-[450px] w-full justify-center">
        <h1 className="font-semibold text-[2.5rem] md:text-[3rem] text-center">
           Youtube Video Downloader
        </h1>
@@ -60,10 +60,11 @@ export default function Home() {
             Convert
           </button>
         </div>
+
       </div>
       {showDownload && (
-        <div>
-          <video src={finalLink} controls className="w-full"></video>
+        <div className="bg-indigo-600 shadow-2xl">
+          <video src={finalLink} controls className="rounded-sm mb-2"></video>
         </div>
       )}
     </main>
