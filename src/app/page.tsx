@@ -52,7 +52,7 @@ export default function Home() {
             className="p-2 py-3 w-[60%] outline-none text-black rounded-md shadow-lg"
             placeholder="Paste your video link here"
           />
-          
+
           <button
             onClick={handleDownload}
             className="border rounded-md py-1 px-4 font-semibold shadow-lg"
@@ -62,8 +62,8 @@ export default function Home() {
         </div>
       </div>
       {showDownload && (
-        <div className="">
-          <video src={finalLink} controls></video>
+        <div>
+          <video src={finalLink} controls className="w-full"></video>
         </div>
       )}
     </main>
