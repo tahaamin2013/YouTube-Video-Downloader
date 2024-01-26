@@ -7,6 +7,6 @@ export async function GET (request:any) {
     const videoFormats = ytdl.filterFormats(info.formats,'video')
     const format = ytdl.chooseFormat(videoFormats, {quality :'highestaudio'})
     const fileName = `${info.videoDetails.title}.${format.container}`
-    const resposeHeaders = {'content-Disposition':`attachment; filename-"${fileName}"`}
+    const resposeHeaders = {'Content-Disposition': `attachment; filename="${fileName}"`};
     return NextResponse.json({format, resposeHeaders, fileName})
 }
