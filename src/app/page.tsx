@@ -1,13 +1,14 @@
+
 "use client";
 
 import axios from "axios";
 import { useState } from "react";
 
 export default function Home() {
-  const [videoLink, setVideoLink] = useState<string>("");
-  const [finalLink, setFinalLink] = useState<string>("");
-  const [mediaLinks, setMediaLinks] = useState<string[]>([]);
-  const [showDownload, setShowDownload] = useState<boolean>(false);
+  const [videoLink, setVideoLink] = useState("");
+  const [finalLink, setFinalLink] = useState("");
+  const [mediaLinks, setMediaLinks] = useState([]);
+  const [showDownload, setShowDownload] = useState(false);
 
   const handleConvert = async () => {
     try {
@@ -21,7 +22,6 @@ export default function Home() {
       console.error(error);
     }
   };
-
   const handleVideoDownloader = async () => {
     try {
       const res = await axios.get(`/api/video-downloader?url=${videoLink}`);
@@ -32,8 +32,7 @@ export default function Home() {
       console.log(err);
     }
   };
-
-  const handleAudioDownloader = async () => {
+  const handleVaudioDownloader = async () => {
     try {
       const res = await axios.get(`/api/audio-downloader?url=${videoLink}`);
       console.log(res.data);
@@ -94,7 +93,7 @@ export default function Home() {
             <h1 className="font-bold text-[3rem]">Video & Audio</h1>
             <div className="flex flex-col sm:flex-row gap-0 sm:gap-16 mb-2 justify-center items-center">
               {mediaLinks.map((link, index) => (
-                <video key={index} src={link} controls className="rounded-xl"></video>
+                <video key={index} src={link} controls className="rounded-xl w-[400px]"></video>
               ))}
             </div>
           </div>
