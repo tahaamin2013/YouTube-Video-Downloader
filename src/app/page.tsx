@@ -4,15 +4,24 @@ import axios from "axios";
 import { useState } from "react";
 
 export default function Home() {
-  const [videoLink, setVideoLink] = useState("");
-  const [finalLink, setFinalLink] = useState("");
-  const [showDownload, setShowDownload] = useState(false);
+  const [videoLink, setVideoLink] = useState<string>("");
+  const [finalLink, setFinalLink] = useState<string>("");
+  const [mediaLinks, setMediaLinks] = useState<string[]>([]);
+  const [showDownload, setShowDownload] = useState<boolean>(false);
 
-  const handleConvert = () => {
-    handleVaudioDownloader();
-    handleVideoDownloader();
-    
+  const handleConvert = async () => {
+    try {
+      const videoRes = await axios.get(`/api/video-downloader?url=${videoLink}`);
+      console.log(videoRes.data);
+      const audioRes = await axios.get(`/api/audio-downloader?url=${videoLink}`);
+      console.log(audioRes.data);
+      setMediaLinks([videoRes.data.format.url, audioRes.data.format.url]);
+      setShowDownload(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   const handleVideoDownloader = async () => {
     try {
       const res = await axios.get(`/api/video-downloader?url=${videoLink}`);
@@ -23,7 +32,8 @@ export default function Home() {
       console.log(err);
     }
   };
-  const handleVaudioDownloader = async () => {
+
+  const handleAudioDownloader = async () => {
     try {
       const res = await axios.get(`/api/audio-downloader?url=${videoLink}`);
       console.log(res.data);
@@ -55,12 +65,12 @@ export default function Home() {
           <p>Share Now</p>
         </div>
       </header>
-      <div className={`flex bg-indigo-600 shadow-2xl rounded-md rounded-b-none text-white flex-col py-[80px] items-center w-full justify-center${
-              showDownload ? '' : ''
-            }`}>
-       <h1 className="font-semibold text-[2.5rem] md:text-[3rem] text-center">
+      <div
+        className={`flex bg-indigo-600 shadow-2xl rounded-md rounded-b-none text-white flex-col py-[80px] items-center w-full justify-center${showDownload ? "" : ""}`}
+      >
+        <h1 className="font-semibold text-[2.5rem] md:text-[3rem] text-center">
           Youtube Video Downloader
-       </h1>
+        </h1>
         <div className="mt-4 space-x-2 w-full p-4 flex justify-center">
           <input
             type="text"
@@ -70,20 +80,23 @@ export default function Home() {
             placeholder="Paste your video link here"
           />
 
-<button
+          <button
             onClick={handleConvert}
             className="border rounded-md py-1 px-4 font-semibold shadow-lg"
           >
             Convert
           </button>
         </div>
-
       </div>
       {showDownload && (
         <div className="bg-indigo-600 gap-3 text-white">
           <div className="flex flex-col justify-center items-center">
-            <h1 className="font-bold text-[3rem]">Video</h1>
-            <video src={finalLink} controls className="rounded-xl shadow-2xl mb-2"></video>
+            <h1 className="font-bold text-[3rem]">Video & Audio</h1>
+            <div className="flex flex-col sm:flex-row gap-0 sm:gap-16 mb-2 justify-center items-center">
+              {mediaLinks.map((link, index) => (
+                <video key={index} src={link} controls className="rounded-xl"></video>
+              ))}
+            </div>
           </div>
         </div>
       )}
