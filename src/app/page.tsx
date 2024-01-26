@@ -33,7 +33,7 @@ export default function Home() {
       <header className="flex justify-between mx-auto max-w-6xl py-4">
         <div>
           <h3 className="text-xl font-semibold tracking-wider">
-            Youtube Downloader
+            Video Downloader
           </h3>
         </div>
         <div>
@@ -41,7 +41,7 @@ export default function Home() {
         </div>
       </header>
       <div className="flex bg-indigo-600 shadow-2xl rounded-md text-white flex-col items-center min-h-[450px] w-full justify-center">
-        <h1 className="font-semibold text-3xl text-center">
+        <h1 className="font-semibold text-[2.5rem] md:text-[3rem] text-center">
           Youtube Video Downloader
         </h1>
         <div className="mt-4 space-x-2 w-full p-4 flex justify-center">
